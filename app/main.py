@@ -10,6 +10,7 @@ import time
 from contextlib import asynccontextmanager
 
 from fastapi import FastAPI, HTTPException
+from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import PlainTextResponse, RedirectResponse
 from fastapi.staticfiles import StaticFiles
 from prometheus_client import CONTENT_TYPE_LATEST, generate_latest
@@ -35,6 +36,15 @@ app = FastAPI(
     description="Сервісна система обробки запитів на основі RAG з локальною LLM",
     version="0.1.0",
     lifespan=lifespan,
+)
+
+# Дозволяємо звернення до API зі сторінки, відкритої не з цього ж origin
+# (напр. з панелі прев'ю / локального файлу). Локальний контур — НФ1.
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_methods=["*"],
+    allow_headers=["*"],
 )
 
 

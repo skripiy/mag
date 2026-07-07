@@ -49,12 +49,16 @@
 const $ = (s) => document.querySelector(s);
 const btn = $("#send"), out = $("#out");
 
+// Коли сторінку віддає застосунок (http://localhost:8000/ui/) — відносний
+// шлях; коли відкрита як файл/у прев'ю — б'ємо напряму в застосунок.
+const API_BASE = location.protocol.startsWith("http") ? "" : "http://localhost:8000";
+
 async function ask() {
   const text = $("#q").value.trim();
   if (!text) return;
   btn.disabled = true; btn.textContent = "Обробка…"; out.innerHTML = "";
   try {
-    const r = await fetch("/ask/sync", {
+    const r = await fetch(API_BASE + "/ask/sync", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ text })
