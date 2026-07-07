@@ -1,0 +1,19 @@
+# GPU-оверлей для Ollama (NVIDIA).
+# Використання:
+#   docker compose -f docker-compose.yml -f docker-compose.gpu.yml up -d
+#
+# Передумови:
+#   - NVIDIA GPU + актуальний драйвер;
+#   - NVIDIA Container Toolkit (Linux) або Docker Desktop із WSL2 + GPU (Windows).
+# Перевірка доступу до GPU з контейнера:
+#   docker compose exec ollama nvidia-smi
+
+services:
+  ollama:
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: 1
+              capabilities: [gpu]

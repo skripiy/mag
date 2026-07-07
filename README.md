@@ -29,10 +29,25 @@
 
 ```bash
 cp .env.example .env
-docker compose up -d --build          # підніме db, ollama, app, prometheus, grafana
+docker compose up -d --build          # підніме db, ollama, app, worker, prometheus, grafana
 docker compose exec ollama ollama pull qwen2.5:3b-instruct
 docker compose exec ollama ollama pull bge-m3
+docker compose exec app python -m app.indexing data/kb   # проіндексувати базу знань
 ```
+
+### Запуск з GPU (NVIDIA)
+
+Потрібні NVIDIA-драйвер і NVIDIA Container Toolkit (Linux) або Docker Desktop із
+WSL2 + GPU (Windows). Додається GPU-оверлей:
+
+```bash
+docker compose -f docker-compose.yml -f docker-compose.gpu.yml up -d --build
+docker compose exec ollama nvidia-smi        # перевірити, що GPU видно з контейнера
+```
+
+Модель обирається в `.env` (`LLM_MODEL`). На 6 ГБ VRAM стабільно працює
+`qwen2.5:3b-instruct`; за наявності ресурсів можна спробувати
+`qwen2.5:7b-instruct` (Q4).
 
 - API:        http://localhost:8000/docs
 - Метрики:    http://localhost:8000/metrics
