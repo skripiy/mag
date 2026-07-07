@@ -32,3 +32,11 @@ async def embed_query(text: str) -> list[float]:
     """Ембединг одного запиту (Ф2)."""
     result = await embed_texts([text])
     return result[0]
+
+
+def to_pgvector(vec: list[float]) -> str:
+    """Літерал pgvector '[a,b,c]' для параметра з приведенням `::vector`.
+
+    Не залежить від адаптерів типів у конкретній версії драйвера.
+    """
+    return "[" + ",".join(repr(float(x)) for x in vec) + "]"

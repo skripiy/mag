@@ -15,7 +15,7 @@ import sys
 
 from app.chunking import chunk_text
 from app.db import connection
-from app.embeddings import embed_texts
+from app.embeddings import embed_texts, to_pgvector
 
 SUPPORTED_SUFFIXES = {".txt", ".md"}
 
@@ -80,8 +80,8 @@ async def index_document(
             for idx, (chunk, emb) in enumerate(zip(chunks, embeddings)):
                 await cur.execute(
                     "INSERT INTO kb_chunks (document_id, chunk_index, content, embedding) "
-                    "VALUES (%s, %s, %s, %s)",
-                    (doc_id, idx, chunk, emb),
+                    "VALUES (%s, %s, %s, %s::vector)",
+                    (doc_id, idx, chunk, to_pgvector(emb)),
                 )
         return doc_id, len(chunks)
 
