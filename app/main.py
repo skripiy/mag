@@ -10,7 +10,8 @@ import time
 from contextlib import asynccontextmanager
 
 from fastapi import FastAPI, HTTPException
-from fastapi.responses import PlainTextResponse
+from fastapi.responses import PlainTextResponse, RedirectResponse
+from fastapi.staticfiles import StaticFiles
 from prometheus_client import CONTENT_TYPE_LATEST, generate_latest
 
 from app.anonymize import anonymize
@@ -35,6 +36,11 @@ app = FastAPI(
     version="0.1.0",
     lifespan=lifespan,
 )
+
+
+@app.get("/", include_in_schema=False)
+async def root() -> RedirectResponse:
+    return RedirectResponse(url="/ui/")
 
 
 @app.get("/health", tags=["service"])
@@ -115,3 +121,7 @@ async def get_request_status(request_id: int) -> AnswerOut:
             for s in rec.sources
         ],
     )
+
+
+# Статичний веб-інтерфейс (підрозділ 3.9). Монтується після роутів API.
+app.mount("/ui", StaticFiles(directory="ui", html=True), name="ui")
