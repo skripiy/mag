@@ -20,11 +20,8 @@ print("[entrypoint] PostgreSQL готовий")
 PY
 
 if [ "$ROLE" = "api" ]; then
-    echo "[entrypoint] застосовую міграції..."
+    echo "[entrypoint] застосовую міграції (вкл. схему черги pgqueuer)..."
     python -m app.migrate
-    echo "[entrypoint] встановлюю схему черги pgqueuer (якщо ще нема)..."
-    python -m pgqueuer install 2>/dev/null && echo "[entrypoint] pgqueuer встановлено" \
-        || echo "[entrypoint] pgqueuer вже встановлено"
     echo "[entrypoint] запускаю API..."
     exec uvicorn app.main:app --host 0.0.0.0 --port 8000
 elif [ "$ROLE" = "worker" ]; then

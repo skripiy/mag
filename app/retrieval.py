@@ -38,7 +38,10 @@ async def search(
     with retrieval_latency.time():
         async with connection() as conn:
             # ef_search керує точністю/швидкістю обходу HNSW на етапі запиту.
-            await conn.execute("SET LOCAL hnsw.ef_search = %s", (ef_search,))
+            # SET LOCAL не приймає bind-параметрів, тож через set_config(is_local=true).
+            await conn.execute(
+                "SELECT set_config('hnsw.ef_search', %s, true)", (str(int(ef_search)),)
+            )
             rows = await (
                 await conn.execute(
                     """

@@ -10,6 +10,9 @@
 """
 from __future__ import annotations
 
+from collections.abc import AsyncIterator
+from contextlib import asynccontextmanager
+
 import psycopg
 from pgqueuer import PgQueuer
 from pgqueuer.db import PsycopgDriver
@@ -20,17 +23,23 @@ from app.pipeline import process_request
 from app.queue.producer import ENTRYPOINT
 
 
-async def create_pgqueuer() -> PgQueuer:
+@asynccontextmanager
+async def create_pgqueuer() -> AsyncIterator[PgQueuer]:
+    """Фабрика для `pgqueuer run` — async context manager, що яких yield-ить
+    налаштований PgQueuer і закриває з'єднання при завершенні."""
     connection = await psycopg.AsyncConnection.connect(
         settings.database_url, autocommit=True
     )
-    pgq = PgQueuer(PsycopgDriver(connection))
+    try:
+        pgq = PgQueuer(PsycopgDriver(connection))
 
-    @pgq.entrypoint(ENTRYPOINT)
-    async def _handle(job: Job) -> None:
-        if job.payload is None:
-            return
-        request_id = int(job.payload.decode())
-        await process_request(request_id)
+        @pgq.entrypoint(ENTRYPOINT)
+        async def _handle(job: Job) -> None:
+            if job.payload is None:
+                return
+            request_id = int(job.payload.decode())
+            await process_request(request_id)
 
-    return pgq
+        yield pgq
+    finally:
+        await connection.close()
