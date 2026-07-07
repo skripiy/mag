@@ -1,0 +1,11 @@
+# Нормалізація перекладу рядків.
+* text=auto eol=lf
+
+# Скрипти, що виконуються в Linux-контейнерах — завжди LF.
+*.sh text eol=lf
+docker/entrypoint.sh text eol=lf
+
+# Бінарні/несортовані — без нормалізації.
+*.svg -text
+*.png binary
+*.gguf binary

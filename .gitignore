@@ -1,0 +1,28 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+.pytest_cache/
+.ruff_cache/
+.mypy_cache/
+
+# Env / secrets
+.env
+*.local
+
+# Data / models
+data/raw/
+data/*.local/
+*.gguf
+
+# Docker volumes (local)
+.pgdata/
+.ollama/
+
+# IDE / OS
+.idea/
+.vscode/
+.DS_Store
+Thumbs.db
