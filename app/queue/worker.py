@@ -1,18 +1,36 @@
-"""Фоновий виконавець черги (pgqueuer).
+"""Фоновий виконавець черги pgqueuer (консюмер, Ф4).
 
-Каркас-заглушка: повна реалізація RAG-пайплайну в черзі — підрозділ 3.6
-(задача «Асинхронна черга»). Наразі лише коректно стартує й чекає.
+Модель черги — поверх PostgreSQL: LISTEN/NOTIFY + FOR UPDATE SKIP LOCKED
+(підрозділ 2.6). Запускається фабрикою через CLI:
+
+    python -m pgqueuer run app.queue.worker:create_pgqueuer
+
+Кілька екземплярів воркера можуть працювати паралельно, не дублюючи
+завдання завдяки SKIP LOCKED (НФ3 масштабованість).
 """
 from __future__ import annotations
 
-import asyncio
+import psycopg
+from pgqueuer import PgQueuer
+from pgqueuer.db import PsycopgDriver
+from pgqueuer.models import Job
+
+from app.config import settings
+from app.pipeline import process_request
+from app.queue.producer import ENTRYPOINT
 
 
-async def main() -> None:
-    print("[worker] стартував (заглушка). Реалізація pgqueuer — задача 6.")
-    while True:
-        await asyncio.sleep(3600)
+async def create_pgqueuer() -> PgQueuer:
+    connection = await psycopg.AsyncConnection.connect(
+        settings.database_url, autocommit=True
+    )
+    pgq = PgQueuer(PsycopgDriver(connection))
 
+    @pgq.entrypoint(ENTRYPOINT)
+    async def _handle(job: Job) -> None:
+        if job.payload is None:
+            return
+        request_id = int(job.payload.decode())
+        await process_request(request_id)
 
-if __name__ == "__main__":
-    asyncio.run(main())
+    return pgq
