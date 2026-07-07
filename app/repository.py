@@ -16,6 +16,7 @@ class RequestRecord:
     id: int
     status: str
     raw_text: str
+    anonymized_text: str | None
     answer: str | None
     latency_ms: int | None
     created_at: datetime
@@ -94,7 +95,7 @@ async def get_request(request_id: int) -> RequestRecord | None:
     async with connection() as conn:
         row = await (
             await conn.execute(
-                "SELECT id, status, raw_text, answer, latency_ms, created_at "
+                "SELECT id, status, raw_text, anonymized_text, answer, latency_ms, created_at "
                 "FROM requests WHERE id = %s",
                 (request_id,),
             )
@@ -131,8 +132,9 @@ async def get_request(request_id: int) -> RequestRecord | None:
         id=row[0],
         status=row[1],
         raw_text=row[2],
-        answer=row[3],
-        latency_ms=row[4],
-        created_at=row[5],
+        anonymized_text=row[3],
+        answer=row[4],
+        latency_ms=row[5],
+        created_at=row[6],
         sources=sources,
     )

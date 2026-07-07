@@ -13,6 +13,7 @@ from fastapi import FastAPI, HTTPException
 from fastapi.responses import PlainTextResponse
 from prometheus_client import CONTENT_TYPE_LATEST, generate_latest
 
+from app.anonymize import anonymize
 from app.db import close_pool, open_pool
 from app.generation import answer_query
 from app.metrics import rag_latency, requests_total
@@ -49,7 +50,10 @@ async def metrics() -> PlainTextResponse:
 @app.post("/ask", response_model=AcceptedOut, status_code=202, tags=["requests"])
 async def ask(req: AskRequest) -> AcceptedOut:
     """Приймає запит і ставить його в чергу на обробку (Ф1 + Ф4)."""
-    request_id, created_at = await create_request(req.text, external_id=req.external_id)
+    anonymized = anonymize(req.text)
+    request_id, created_at = await create_request(
+        req.text, external_id=req.external_id, anonymized_text=anonymized
+    )
     await enqueue_request(request_id)
     requests_total.labels(status="accepted").inc()
     return AcceptedOut(request_id=request_id, status="pending", created_at=created_at)
@@ -58,10 +62,13 @@ async def ask(req: AskRequest) -> AcceptedOut:
 @app.post("/ask/sync", response_model=AnswerOut, tags=["requests"])
 async def ask_sync(req: AskRequest) -> AnswerOut:
     """Синхронний RAG: пошук + генерація одразу (демонстрація/тести)."""
-    request_id, _ = await create_request(req.text, external_id=req.external_id)
+    anonymized = anonymize(req.text)
+    request_id, _ = await create_request(
+        req.text, external_id=req.external_id, anonymized_text=anonymized
+    )
     started = time.perf_counter()
     with rag_latency.time():
-        result = await answer_query(req.text)
+        result = await answer_query(anonymized)
     latency_ms = int((time.perf_counter() - started) * 1000)
     await save_result(request_id, result.answer, result.sources, latency_ms)
     requests_total.labels(status="done").inc()

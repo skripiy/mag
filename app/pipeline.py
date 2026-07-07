@@ -17,7 +17,7 @@ async def process_request(request_id: int) -> None:
     if rec is None:
         return
     # Для обробки беремо знеособлений текст, якщо він є (задача PII, 3.7).
-    query = rec.raw_text
+    query = rec.anonymized_text or rec.raw_text
 
     await mark_processing(request_id)
     started = time.perf_counter()
