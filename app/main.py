@@ -15,9 +15,9 @@ from fastapi.responses import PlainTextResponse, RedirectResponse
 from fastapi.staticfiles import StaticFiles
 from prometheus_client import CONTENT_TYPE_LATEST, generate_latest
 
+from app.agent import answer as agent_answer
 from app.anonymize import anonymize
 from app.db import close_pool, open_pool
-from app.generation import answer_query
 from app.metrics import rag_latency, requests_total
 from app.queue.producer import enqueue_request
 from app.repository import create_request, get_request, save_result
@@ -84,7 +84,7 @@ async def ask_sync(req: AskRequest) -> AnswerOut:
     )
     started = time.perf_counter()
     with rag_latency.time():
-        result = await answer_query(anonymized)
+        result = await agent_answer(anonymized)
     latency_ms = int((time.perf_counter() - started) * 1000)
     await save_result(request_id, result.answer, result.sources, latency_ms)
     requests_total.labels(status="done").inc()

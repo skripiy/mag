@@ -27,6 +27,10 @@ class Settings(BaseSettings):
     llm_num_ctx: int = 4096
     llm_max_tokens: int = 800
 
+    # Зовнішні інструменти (tool-calling)
+    enable_tools: bool = True
+    mock_crm_url: str = "http://mock-crm:9100"
+
     log_level: str = "INFO"
 
 

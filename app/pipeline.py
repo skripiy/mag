@@ -7,7 +7,7 @@ from __future__ import annotations
 
 import time
 
-from app.generation import answer_query
+from app.agent import answer as agent_answer
 from app.metrics import rag_latency, requests_total
 from app.repository import get_request, mark_failed, mark_processing, save_result
 
@@ -23,7 +23,7 @@ async def process_request(request_id: int) -> None:
     started = time.perf_counter()
     try:
         with rag_latency.time():
-            result = await answer_query(query)
+            result = await agent_answer(query)
         latency_ms = int((time.perf_counter() - started) * 1000)
         await save_result(request_id, result.answer, result.sources, latency_ms)
         requests_total.labels(status="done").inc()

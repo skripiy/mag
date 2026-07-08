@@ -40,3 +40,35 @@ async def chat(user_prompt: str, system_prompt: str | None = None) -> str:
     if not content:
         raise RuntimeError(f"Ollama повернув порожню відповідь: {data!r}")
     return content.strip()
+
+
+async def chat_raw(
+    messages: list[dict],
+    tools: list[dict] | None = None,
+    num_predict: int | None = None,
+) -> dict:
+    """Низькорівневий виклик /api/chat зі списком повідомлень та (опційно)
+    інструментами. Повертає повне повідомлення асистента (може містити
+    tool_calls). Використовується агентним роутером.
+
+    num_predict дозволяє обмежити довжину відповіді (напр. для дешевого
+    маршрутизувального виклику, якому потрібне лише рішення про інструмент)."""
+    payload: dict = {
+        "model": settings.llm_model,
+        "messages": messages,
+        "stream": False,
+        "options": {
+            "temperature": settings.llm_temperature,
+            "num_ctx": settings.llm_num_ctx,
+            "num_predict": num_predict or settings.llm_max_tokens,
+        },
+    }
+    if tools:
+        payload["tools"] = tools
+
+    with llm_latency.time():
+        async with httpx.AsyncClient(base_url=settings.ollama_url, timeout=300) as client:
+            resp = await client.post("/api/chat", json=payload)
+            resp.raise_for_status()
+            data = resp.json()
+    return data.get("message") or {}

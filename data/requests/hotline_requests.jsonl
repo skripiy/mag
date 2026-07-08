@@ -26,3 +26,7 @@
 {"id": "req-026", "text": "Скільки часу розглядають заяву на компенсацію за пошкоджене житло?", "category": "pravova_dopomoga", "expected_doc": "pravova_dopomoga", "has_pii": false, "note": ""}
 {"id": "req-027", "text": "Доброго дня! Я ВПО з Бахмута, мені потрібна і грошова допомога, і продуктовий набір. Коваленко Андрій, 0509998877, ІПН 3344556677.", "category": "groshova_dopomoga", "expected_doc": "groshova_dopomoga", "has_pii": true, "note": "multi-topic; name, phone, ipn"}
 {"id": "req-028", "text": "Я вже отримувала допомогу пів року тому. Чи можу я подати заявку ще раз?", "category": "groshova_dopomoga", "expected_doc": "groshova_dopomoga", "has_pii": false, "note": "repeat request"}
+{"id": "req-029", "text": "Доброго дня, який статус моєї заявки APP-2024-000123?", "category": "status_lookup", "expected_doc": null, "has_pii": false, "note": "tool: application status"}
+{"id": "req-030", "text": "Коли мені виплатять кошти за заявкою APP-2024-000456?", "category": "status_lookup", "expected_doc": null, "has_pii": false, "note": "tool: application status, approved"}
+{"id": "req-031", "text": "Перевірте будь ласка мою заявку APP-2024-000789, чогось не вистачає?", "category": "status_lookup", "expected_doc": null, "has_pii": false, "note": "tool: needs documents"}
+{"id": "req-032", "text": "Хочу дізнатися статус заявки, але номер не пам'ятаю", "category": "status_lookup", "expected_doc": null, "has_pii": false, "note": "tool: missing code -> clarify"}
