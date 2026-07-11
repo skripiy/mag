@@ -11,7 +11,7 @@
 | Компонент | Рішення |
 |---|---|
 | API | Python 3.11 / FastAPI |
-| LLM | Ollama, локальна модель `qwen2.5:3b-instruct` |
+| LLM | Ollama, локальна модель `gemma4:e4b` (Gemma 4, E4B) |
 | Ембединги | `bge-m3` (через Ollama), 1024-вимірні |
 | Сховище + вектори + черга | PostgreSQL 16 + pgvector (HNSW, косинус) |
 | Черга завдань | pgqueuer (LISTEN/NOTIFY + FOR UPDATE SKIP LOCKED) |
@@ -30,7 +30,7 @@
 ```bash
 cp .env.example .env
 docker compose up -d --build          # підніме db, ollama, app, worker, prometheus, grafana
-docker compose exec ollama ollama pull qwen2.5:3b-instruct
+docker compose exec ollama ollama pull gemma4:e4b
 docker compose exec ollama ollama pull bge-m3
 docker compose exec app python -m app.indexing data/kb   # проіндексувати базу знань
 ```
@@ -45,9 +45,14 @@ docker compose -f docker-compose.yml -f docker-compose.gpu.yml up -d --build
 docker compose exec ollama nvidia-smi        # перевірити, що GPU видно з контейнера
 ```
 
-Модель обирається в `.env` (`LLM_MODEL`). На 6 ГБ VRAM стабільно працює
-`qwen2.5:3b-instruct`; за наявності ресурсів можна спробувати
-`qwen2.5:7b-instruct` (Q4).
+Модель обирається в `.env` (`LLM_MODEL`). За замовчуванням — `gemma4:e4b`
+(Gemma 4, E4B, Q4_K_M): за порівнянням п'яти моделей (див. Розділ 4) вона дає
+найкращу достовірність відповідей і при цьому **повністю вміщається в 6 ГБ
+VRAM** (рантайм ≈3.3 ГБ, 100 % на GPU), тож латентність лишається низькою.
+Альтернативи: `qwen2.5:3b-instruct` (найшвидша, слабша достовірність) або
+`qwen2.5:7b-instruct` (близька якість, але ~4× повільніша — не вміщається
+повністю й виносить частину шарів на CPU). Reasoning-моделі викликаються з
+вимкненим ланцюгом роздумів (`think: false`).
 
 - Веб-UI:     http://localhost:8000/
 - API:        http://localhost:8000/docs

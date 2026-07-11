@@ -30,3 +30,71 @@
 {"id": "req-030", "text": "Коли мені виплатять кошти за заявкою APP-2024-000456?", "category": "status_lookup", "expected_doc": null, "has_pii": false, "note": "tool: application status, approved"}
 {"id": "req-031", "text": "Перевірте будь ласка мою заявку APP-2024-000789, чогось не вистачає?", "category": "status_lookup", "expected_doc": null, "has_pii": false, "note": "tool: needs documents"}
 {"id": "req-032", "text": "Хочу дізнатися статус заявки, але номер не пам'ятаю", "category": "status_lookup", "expected_doc": null, "has_pii": false, "note": "tool: missing code -> clarify"}
+{"id": "req-033", "text": "Чи можу я розраховувати на фінансову підтримку, якщо я щойно переїхала і не маю роботи?", "category": "groshova_dopomoga", "expected_doc": "groshova_dopomoga", "has_pii": false, "note": "paraphrase"}
+{"id": "req-034", "text": "скажіть будласка чи можу получити гроши на дитину я одна мама", "category": "groshova_dopomoga", "expected_doc": "groshova_dopomoga", "has_pii": false, "note": "суржик, без пунктуації"}
+{"id": "req-035", "text": "Мої реквізити для виплати: картка 5168 7420 1122 3344, IBAN UA213223130000026007233566001. Куди надіслати заявку?", "category": "groshova_dopomoga", "expected_doc": "groshova_dopomoga", "has_pii": true, "note": "card, iban"}
+{"id": "req-036", "text": "Через скільки днів після схвалення заявки приходять кошти?", "category": "groshova_dopomoga", "expected_doc": "groshova_dopomoga", "has_pii": false, "note": ""}
+{"id": "req-037", "text": "Я подала заявку 05 11 2024, мені назвали суму 6600. Це вже точно затверджено?", "category": "groshova_dopomoga", "expected_doc": "groshova_dopomoga", "has_pii": false, "note": "pii-negative: дата і сума не є PII"}
+{"id": "req-038", "text": "Тарасенко Ірина Володимирівна, 0973456712, я багатодітна мама, хочу подати на грошову допомогу.", "category": "groshova_dopomoga", "expected_doc": "groshova_dopomoga", "has_pii": true, "note": "name, phone"}
+{"id": "req-039", "text": "доброго дня чи є грошова допомога для вагітних жынок?", "category": "groshova_dopomoga", "expected_doc": "groshova_dopomoga", "has_pii": false, "note": "typo"}
+{"id": "req-040", "text": "Скільки часу займає оформлення довідки ВПО?", "category": "reestratsiya_vpo", "expected_doc": "reestratsiya_vpo", "has_pii": false, "note": ""}
+{"id": "req-041", "text": "а можно зробить довидку впо через дію не виходячи з дому?", "category": "reestratsiya_vpo", "expected_doc": "reestratsiya_vpo", "has_pii": false, "note": "суржик, typo"}
+{"id": "req-042", "text": "Паспорт МК123456, проживаю зараз м. Дніпро вул. Січова 22 кв 5. Треба оновити дані в довідці.", "category": "reestratsiya_vpo", "expected_doc": "reestratsiya_vpo", "has_pii": true, "note": "passport, address"}
+{"id": "req-043", "text": "Що буде, якщо я не повідомлю про зміну адреси проживання?", "category": "reestratsiya_vpo", "expected_doc": "reestratsiya_vpo", "has_pii": false, "note": ""}
+{"id": "req-044", "text": "Моя довідка ВПО №1234567890 від 2023 року ще дійсна?", "category": "reestratsiya_vpo", "expected_doc": "reestratsiya_vpo", "has_pii": false, "note": "pii-negative: номер довідки схожий на ІПН, але не PII"}
+{"id": "req-045", "text": "Напишіть відповідь на пошту olena.vpo@gmail.com — які докази проживання підійдуть для довідки?", "category": "reestratsiya_vpo", "expected_doc": "reestratsiya_vpo", "has_pii": true, "note": "email"}
+{"id": "req-046", "text": "Чи безкоштовне оформлення довідки переселенця?", "category": "reestratsiya_vpo", "expected_doc": "reestratsiya_vpo", "has_pii": false, "note": ""}
+{"id": "req-047", "text": "втратила довидку впо шо тепер робити де відновлювати", "category": "reestratsiya_vpo", "expected_doc": "reestratsiya_vpo", "has_pii": false, "note": "typo, без пунктуації"}
+{"id": "req-048", "text": "Мельник Богдан, РНОКПП 3210987654, хочу поновити призупинені виплати.", "category": "reestratsiya_vpo", "expected_doc": "reestratsiya_vpo", "has_pii": true, "note": "name, rnokpp"}
+{"id": "req-049", "text": "Що входить у продуктовий набір?", "category": "humanitarni_nabory", "expected_doc": "humanitarni_nabory", "has_pii": false, "note": ""}
+{"id": "req-050", "text": "коли можна забрать гигиєнічний набор?", "category": "humanitarni_nabory", "expected_doc": "humanitarni_nabory", "has_pii": false, "note": "суржик, typo"}
+{"id": "req-051", "text": "Запишіть мене на видачу набору, мій номер 0501112244.", "category": "humanitarni_nabory", "expected_doc": "humanitarni_nabory", "has_pii": true, "note": "phone"}
+{"id": "req-052", "text": "Чи можна отримати дитячий набір з підгузками та дитячим харчуванням?", "category": "humanitarni_nabory", "expected_doc": "humanitarni_nabory", "has_pii": false, "note": ""}
+{"id": "req-053", "text": "Нас у сімʼї 5 осіб, чи можна отримати 2 набори на місяць?", "category": "humanitarni_nabory", "expected_doc": "humanitarni_nabory", "has_pii": false, "note": "pii-negative: кількості не є PII"}
+{"id": "req-054", "text": "Гнатюк Олег Петрович, паспорт СН654321, прошу адресну доставку, я маломобільний.", "category": "humanitarni_nabory", "expected_doc": "humanitarni_nabory", "has_pii": true, "note": "name, passport"}
+{"id": "req-055", "text": "Як часто видають продуктові набори?", "category": "humanitarni_nabory", "expected_doc": "humanitarni_nabory", "has_pii": false, "note": ""}
+{"id": "req-056", "text": "потрібна доставка додому мама лежача сама не дійде", "category": "humanitarni_nabory", "expected_doc": "humanitarni_nabory", "has_pii": false, "note": "без пунктуації"}
+{"id": "req-057", "text": "Де можна тимчасово пожити переселенцю без коштів?", "category": "prytulok_zhytlo", "expected_doc": "prytulok_zhytlo", "has_pii": false, "note": ""}
+{"id": "req-058", "text": "Чи платне проживання в колективному центрі?", "category": "prytulok_zhytlo", "expected_doc": "prytulok_zhytlo", "has_pii": false, "note": ""}
+{"id": "req-059", "text": "а дадуть окрему кімнату якщо в мене двоє маленьких дітей?", "category": "prytulok_zhytlo", "expected_doc": "prytulok_zhytlo", "has_pii": false, "note": "суржик"}
+{"id": "req-060", "text": "Ми зараз на вокзалі в м. Вінниця, тел 0684455667, немає де ночувати.", "category": "prytulok_zhytlo", "expected_doc": "prytulok_zhytlo", "has_pii": true, "note": "address, phone"}
+{"id": "req-061", "text": "Чи є програма, що допомагає оплатити оренду житла?", "category": "prytulok_zhytlo", "expected_doc": "prytulok_zhytlo", "has_pii": false, "note": ""}
+{"id": "req-062", "text": "Родина Сидоренків, четверо осіб, шукаємо тимчасове житло.", "category": "prytulok_zhytlo", "expected_doc": "prytulok_zhytlo", "has_pii": true, "note": "name (прізвище)"}
+{"id": "req-063", "text": "Які документи потрібні для заселення в колективний центр?", "category": "prytulok_zhytlo", "expected_doc": "prytulok_zhytlo", "has_pii": false, "note": ""}
+{"id": "req-064", "text": "Чи можна заселитися в центр, якщо ще не оформив довідку ВПО?", "category": "prytulok_zhytlo", "expected_doc": "prytulok_zhytlo", "has_pii": false, "note": "edge, межа тем"}
+{"id": "req-065", "text": "Чи конфіденційна консультація психолога?", "category": "psyhosocialna_pidtrymka", "expected_doc": "psyhosocialna_pidtrymka", "has_pii": false, "note": ""}
+{"id": "req-066", "text": "Мій чоловік замкнувся після повернення з фронту, погано спить. Куди звернутися?", "category": "psyhosocialna_pidtrymka", "expected_doc": "psyhosocialna_pidtrymka", "has_pii": false, "note": ""}
+{"id": "req-067", "text": "потрибна термінова психологічна поміч зараз дуже погано", "category": "psyhosocialna_pidtrymka", "expected_doc": "psyhosocialna_pidtrymka", "has_pii": false, "note": "typo, екстрений стан"}
+{"id": "req-068", "text": "Звати Наталя, 0632221100, мені постійно тривожно і немає сил.", "category": "psyhosocialna_pidtrymka", "expected_doc": "psyhosocialna_pidtrymka", "has_pii": true, "note": "name, phone"}
+{"id": "req-069", "text": "Чи є окремі заняття з психологом для дітей?", "category": "psyhosocialna_pidtrymka", "expected_doc": "psyhosocialna_pidtrymka", "has_pii": false, "note": ""}
+{"id": "req-070", "text": "Скільки коштує консультація психолога у вас?", "category": "psyhosocialna_pidtrymka", "expected_doc": "psyhosocialna_pidtrymka", "has_pii": false, "note": ""}
+{"id": "req-071", "text": "дитина боїться салютів і гучних звуків постійно плаче що робити", "category": "psyhosocialna_pidtrymka", "expected_doc": "psyhosocialna_pidtrymka", "has_pii": false, "note": "без пунктуації"}
+{"id": "req-072", "text": "Прошу записати на консультацію, моя пошта maria85@ukr.net.", "category": "psyhosocialna_pidtrymka", "expected_doc": "psyhosocialna_pidtrymka", "has_pii": true, "note": "email"}
+{"id": "req-073", "text": "Як відновити втрачене свідоцтво про народження дитини?", "category": "pravova_dopomoga", "expected_doc": "pravova_dopomoga", "has_pii": false, "note": ""}
+{"id": "req-074", "text": "Куди подавати заяву на компенсацію за зруйноване житло?", "category": "pravova_dopomoga", "expected_doc": "pravova_dopomoga", "has_pii": false, "note": ""}
+{"id": "req-075", "text": "розбили квартиру снарядом як получить компенсацию", "category": "pravova_dopomoga", "expected_doc": "pravova_dopomoga", "has_pii": false, "note": "суржик, typo"}
+{"id": "req-076", "text": "Ковальчук Петро, РНОКПП 2109876543, будинок за адресою с. Гуляйполе вул. Шевченка 8 зруйновано.", "category": "pravova_dopomoga", "expected_doc": "pravova_dopomoga", "has_pii": true, "note": "name, rnokpp, address"}
+{"id": "req-077", "text": "Чи безоплатна правова консультація для внутрішньо переміщених осіб?", "category": "pravova_dopomoga", "expected_doc": "pravova_dopomoga", "has_pii": false, "note": ""}
+{"id": "req-078", "text": "Мій будинок пошкоджено 24 02 2022, площа 60 кв м. Як подати повідомлення?", "category": "pravova_dopomoga", "expected_doc": "pravova_dopomoga", "has_pii": false, "note": "pii-negative: дата і площа не є PII"}
+{"id": "req-079", "text": "Втратив паспорт МН998877 під час обстрілу, допоможіть відновити.", "category": "pravova_dopomoga", "expected_doc": "pravova_dopomoga", "has_pii": true, "note": "passport"}
+{"id": "req-080", "text": "потрібен юрист щоб скласти заяву на відновлення документів", "category": "pravova_dopomoga", "expected_doc": "pravova_dopomoga", "has_pii": false, "note": "без пунктуації"}
+{"id": "req-081", "text": "Допоможіть будь ласка.", "category": "ambiguous", "expected_doc": null, "has_pii": false, "note": "too vague"}
+{"id": "req-082", "text": "Скільки це коштує?", "category": "ambiguous", "expected_doc": null, "has_pii": false, "note": "ambiguous"}
+{"id": "req-083", "text": "А куди мені йти?", "category": "ambiguous", "expected_doc": null, "has_pii": false, "note": "ambiguous"}
+{"id": "req-084", "text": "Порадьте хорошого стоматолога в Києві.", "category": "out_of_scope", "expected_doc": null, "has_pii": false, "note": "out of scope"}
+{"id": "req-085", "text": "Скільки зараз коштує проїзд у метро?", "category": "out_of_scope", "expected_doc": null, "has_pii": false, "note": "out of scope"}
+{"id": "req-086", "text": "Можете допомогти знайти роботу за кордоном?", "category": "out_of_scope", "expected_doc": null, "has_pii": false, "note": "out of scope"}
+{"id": "req-087", "text": "Який сьогодні курс долара?", "category": "out_of_scope", "expected_doc": null, "has_pii": false, "note": "out of scope"}
+{"id": "req-088", "text": "Який статус моєї заявки APP-2024-000999?", "category": "status_lookup", "expected_doc": null, "has_pii": false, "note": "tool: виплачено"}
+{"id": "req-089", "text": "Чому відхилили мою заявку APP-2024-000111?", "category": "status_lookup", "expected_doc": null, "has_pii": false, "note": "tool: відхилено"}
+{"id": "req-090", "text": "Перевірте будь ласка заявку APP-2024-000222.", "category": "status_lookup", "expected_doc": null, "has_pii": false, "note": "tool: not_found (немає в CRM)"}
+{"id": "req-091", "text": "шо там по моїй заявці app 2024 000456", "category": "status_lookup", "expected_doc": null, "has_pii": false, "note": "tool: нижній регістр/пробіли, схвалено"}
+{"id": "req-092", "text": "хочу дізнатись статус заявки на виплату", "category": "status_lookup", "expected_doc": null, "has_pii": false, "note": "tool: немає номера -> уточнити"}
+{"id": "req-093", "text": "Яка точна сума грошової допомоги в гривнях на місяць?", "category": "faithfulness_trap", "expected_doc": "groshova_dopomoga", "has_pii": false, "note": "faithfulness: конкретної суми немає в БЗ, очікується чесне 'недостатньо інформації'"}
+{"id": "req-094", "text": "Який розмір щомісячної виплати ВПО у 2024 році?", "category": "faithfulness_trap", "expected_doc": "reestratsiya_vpo", "has_pii": false, "note": "faithfulness: конкретної суми немає в БЗ"}
+{"id": "req-095", "text": "О котрій годині відкривається ваш пункт видачі на вулиці Хрещатик?", "category": "faithfulness_trap", "expected_doc": "humanitarni_nabory", "has_pii": false, "note": "faithfulness: конкретної адреси/часу немає в БЗ"}
+{"id": "req-096", "text": "Дайте точну адресу найближчого колективного центру.", "category": "faithfulness_trap", "expected_doc": "prytulok_zhytlo", "has_pii": false, "note": "faithfulness: конкретної адреси немає в БЗ"}
+{"id": "req-097", "text": "Дайте прямий мобільний номер чергового психолога.", "category": "faithfulness_trap", "expected_doc": "psyhosocialna_pidtrymka", "has_pii": false, "note": "faithfulness: номера немає в БЗ"}
+{"id": "req-098", "text": "Скільки саме гривень компенсації за зруйновану квартиру 50 кв м?", "category": "faithfulness_trap", "expected_doc": "pravova_dopomoga", "has_pii": false, "note": "faithfulness: суми немає в БЗ; pii-negative: площа не є PII"}
+{"id": "req-099", "text": "Чи дає ваша організація кредити під 0 відсотків?", "category": "faithfulness_trap", "expected_doc": null, "has_pii": false, "note": "faithfulness: послуги немає — не вигадувати"}
+{"id": "req-100", "text": "Чи видаєте ви ноутбуки дітям для навчання?", "category": "faithfulness_trap", "expected_doc": null, "has_pii": false, "note": "faithfulness: такого набору немає в БЗ — не вигадувати"}

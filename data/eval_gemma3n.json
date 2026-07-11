@@ -1,0 +1,104 @@
+{
+  "dataset": "data/requests/hotline_requests.jsonl",
+  "n_total": 100,
+  "retrieval": {
+    "n_subset": 77,
+    "overall": {
+      "n": 77,
+      "recall_at_k": 1.0,
+      "p_at_1": 0.8831168831168831,
+      "mrr": 0.9372294372294373,
+      "latency_ms": "сер=234 мс · p50=234 мс · p95=330 мс · max=389 мс"
+    },
+    "per_cat": {
+      "groshova_dopomoga": {
+        "n": 13,
+        "recall_at_k": 1.0,
+        "p_at_1": 0.8461538461538461,
+        "mrr": 0.9230769230769231
+      },
+      "reestratsiya_vpo": {
+        "n": 12,
+        "recall_at_k": 1.0,
+        "p_at_1": 0.8333333333333334,
+        "mrr": 0.9166666666666666
+      },
+      "humanitarni_nabory": {
+        "n": 12,
+        "recall_at_k": 1.0,
+        "p_at_1": 1.0,
+        "mrr": 1.0
+      },
+      "prytulok_zhytlo": {
+        "n": 11,
+        "recall_at_k": 1.0,
+        "p_at_1": 0.8181818181818182,
+        "mrr": 0.893939393939394
+      },
+      "psyhosocialna_pidtrymka": {
+        "n": 11,
+        "recall_at_k": 1.0,
+        "p_at_1": 0.9090909090909091,
+        "mrr": 0.9545454545454546
+      },
+      "pravova_dopomoga": {
+        "n": 12,
+        "recall_at_k": 1.0,
+        "p_at_1": 0.9166666666666666,
+        "mrr": 0.9583333333333334
+      },
+      "faithfulness_trap": {
+        "n": 6,
+        "recall_at_k": 1.0,
+        "p_at_1": 0.8333333333333334,
+        "mrr": 0.8888888888888888
+      }
+    }
+  },
+  "routing": {
+    "tp": 8,
+    "fp": 1,
+    "tn": 90,
+    "fn": 1,
+    "precision": 0.8888888888888888,
+    "recall": 0.8888888888888888,
+    "f1": 0.8888888888888888,
+    "accuracy": 0.98,
+    "errors": [
+      {
+        "id": "req-021",
+        "type": "false_tool",
+        "text": "Прошу повідомити статус моєї заявки. Пошта petro.h@ukr.net, тел 067 345 67 89."
+      },
+      {
+        "id": "req-091",
+        "type": "missed_tool",
+        "text": "шо там по моїй заявці app 2024 000456"
+      }
+    ]
+  },
+  "anonymization": {
+    "presidio": false,
+    "pii_n": 20,
+    "pii_recall": 0.95,
+    "neg_n": 5,
+    "neg_fp": 1,
+    "neg_fp_rate": 0.2,
+    "neg_fp_ids": [
+      "req-044"
+    ],
+    "clean_n": 75,
+    "clean_fp": 0,
+    "clean_fp_rate": 0.0
+  },
+  "answers": {
+    "refuse_total": 20,
+    "refuse_ok": 3,
+    "refuse_rate": 0.15,
+    "answer_total": 70,
+    "answer_wrong_refuse": 11,
+    "answer_false_refuse_rate": 0.15714285714285714,
+    "failed": 9,
+    "latency_ms": "сер=5107 мс · p50=4271 мс · p95=9876 мс · max=11711 мс"
+  }
+}

@@ -12,7 +12,7 @@ class Settings(BaseSettings):
 
     # Ollama
     ollama_url: str = "http://ollama:11434"
-    llm_model: str = "qwen2.5:3b-instruct"
+    llm_model: str = "gemma4:e4b"
     embed_model: str = "bge-m3"
     embed_dim: int = 1024
 

@@ -22,6 +22,10 @@ async def chat(user_prompt: str, system_prompt: str | None = None) -> str:
         "model": settings.llm_model,
         "messages": messages,
         "stream": False,
+        # Для моделей із «мисленням» (reasoning) вимикаємо ланцюг роздумів:
+        # система потребує прямої стислої відповіді, а не токенів на міркування
+        # (НФ2). Для звичайних моделей параметр ігнорується.
+        "think": False,
         "options": {
             "temperature": settings.llm_temperature,
             "num_ctx": settings.llm_num_ctx,
@@ -57,6 +61,7 @@ async def chat_raw(
         "model": settings.llm_model,
         "messages": messages,
         "stream": False,
+        "think": False,  # прямі відповіді без ланцюга роздумів (див. chat)
         "options": {
             "temperature": settings.llm_temperature,
             "num_ctx": settings.llm_num_ctx,
